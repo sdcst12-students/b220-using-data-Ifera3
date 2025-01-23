@@ -96,7 +96,148 @@ class StarSystem():
         if self.mainWorldAtmosphere <= 0:
             return "No atmosphere."
         elif self.mainWorldAtmosphere == 1:
-            return ""
+            return "Trace."
+        elif self.mainWorldAtmosphere == 2:
+            return "Very thin, tainted."
+        elif self.mainWorldAtmosphere == 3:
+            return "Very thin."
+        elif self.mainWorldAtmosphere == 4:
+            return "Thin, tainted."
+        elif self.mainWorldAtmosphere == 5:
+            return "Thin."
+        elif self.mainWorldAtmosphere == 6:
+            return "Standered."
+        elif self.mainWorldAtmosphere == 7:
+            return "Standered, tainted."
+        elif self.mainWorldAtmosphere == 8:
+            return "Dense."
+        elif self.mainWorldAtmosphere == 9:
+            return "Dense, Tainted."
+        elif self.mainWorldAtmosphere == 10:
+            return "Exotic."
+        elif self.mainWorldAtmosphere == 11:
+            return "Corrosive."
+        elif self.mainWorldAtmosphere == 12:
+            return "Insidious."
+        elif self.mainWorldAtmosphere == 13:
+            return "Dense, high."
+        elif self.mainWorldAtmosphere == 14:
+            return "Ellipsoid"
+        elif self.mainWorldAtmosphere >= 15:
+            return "Thin, low."
+
+    def mainWorldHydrographicsLookUpTable(self):
+        if self.mainWorldHydrographics <= 0:
+            return "No free standing water."
+        elif self.mainWorldHydrographics == 1:
+            return "10% water."
+        elif self.mainWorldHydrographics == 2:
+            return "20% water."
+        elif self.mainWorldHydrographics == 3:
+            return "30% water."
+        elif self.mainWorldHydrographics == 4:
+            return "40% water."
+        elif self.mainWorldHydrographics == 5:
+            return "50% water."
+        elif self.mainWorldHydrographics == 6:
+            return "60% water."
+        elif self.mainWorldHydrographics == 7:
+            return "70% water."
+        elif self.mainWorldHydrographics == 8:
+            return "80% water."
+        elif self.mainWorldHydrographics == 9:
+            return "90% water."
+        elif self.mainWorldHydrographics == 10:
+            return "No land masses."
+
+    def populationLookUpTable(self):
+        if self.population <= 0:
+            return "No inhabitans."
+        elif self.population == 1:
+            return "Tens of inhabitans."
+        elif self.population == 2:
+            return "Hundreds of inhabitans."
+        elif self.population == 3:
+            return "Thousands of inhabitans."
+        elif self.population == 4:
+            return "Tens of thousands."
+        elif self.population == 5:
+            return "Hundreds of thousands."
+        elif self.population == 6:
+            return "Millions of inhabitans."
+        elif self.population == 7:
+            return "Tens of millions."
+        elif self.population == 8:
+            return "Hundreds of millions."
+        elif self.population == 9:
+            return "Billions of inhabitans."
+        elif self.population >= 10:
+            return "Tens of billions."
+
+    def govermentLookUpTable(self):
+        if self.goverment <= 0:
+            return "No goverment struture."
+        elif self.goverment  == 1:
+            return "Company/Corparation."
+        elif self.goverment  == 2:
+            return "Participating Democracy."
+        elif self.goverment  == 3:
+            return "Self-Perpatuating Oligarchy."
+        elif self.goverment  == 4:
+            return "Representative Democracy."
+        elif self.goverment  == 5:
+            return "Feudal Technocracy."
+        elif self.goverment  == 6:
+            return "Captive Goverment."
+        elif self.goverment  == 7:
+            return "Balkanization."
+        elif self.goverment  == 8:
+            return "Civil Service Bureaucracy."
+        elif self.goverment  == 9:
+            return "Impersonal Bureaucracy."
+        elif self.goverment  == 10:
+            return "Charismatic Dictator."
+        elif self.goverment  == 11:
+            return "Non-Charismatic Leader."
+        elif self.goverment  == 12:
+            return "Charismatic Oligarchy."
+        elif self.goverment  == 13:
+            return "Religious Dictatorship."
+
+    def lawLevelLookUpTable(self): #need to add laws from lower numbers
+        if self.lawLevel <= 0:
+            return "No prohibitions."
+        elif self.lawLevel == 1:
+            return "Body pistols undetectable by standard detectors, explosives, and poison gas prohibited."
+        elif self.lawLevel == 2:
+            return "Portable ebergy weapons prohibited."
+        elif self.lawLevel == 3:
+            return "Weapons of a strict military nature prohibited."
+        elif self.lawLevel == 4:
+            return "Light assault weapons prohibited."
+        elif self.lawLevel == 5:
+            return "Personal concealable firearms prohibited."
+        elif self.lawLevel == 6:
+            return "Most firearms prohibited. Thhe carrying of any type of weapon is discouraged."
+        elif self.lawLevel == 7:
+            return "Shotguns are prohibited."
+        elif self.lawLevel == 8:
+            return "Long bladed weapons are controlled, and open possession is prohibited."
+        elif self.lawLevel == 9:
+            return "Possesion of any weapon outside one's residance is prohibited."
+        elif self.lawLevel >= 10:
+            return "Possession of any weapon is prohibited."
+
+    def __str__(self):
+        if self.navelBase:
+            waterbase = "Has a Navel Base."
+        else:
+            waterbase = "No Navel Base."
+        if self.gasGiatnt:
+            gas = "Star system has gas giants."
+        else:
+            gas = "Star system has only terrestrial planets."
+        return f"Star system {self.name}. Starport: {self.starportLookUpTable()} {waterbase} {gas} Main world size: {self.mainWorldSizeLookUpTable()} Main world atmosphere: {self.mainWorldAtmosphereLookUpTable()} Main world Hydrograhics: {self.mainWorldHydrographicsLookUpTable()} Population: {self.populationLookUpTable()} Goverment: {self.govermentLookUpTable()} Law level: {self.lawLevelLookUpTable()}"
 
     def __init__(self):
         spaceNameTable = ['1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
@@ -177,5 +318,5 @@ if __name__ == "__main__":
     galaxy = []
     for i in range(20):
         galaxy.append(StarSystem())
-        print(galaxy[i].mainWorldSizeLookUpTable())
-    
+    for i in galaxy:
+        print(i, '\n')

@@ -3,11 +3,12 @@
 import random
 
 class StarSystem():
+    #defalt values for star system
     name = ""
     starport = "X"
     navelBase = False
     scoutBase = False
-    gasGiatnt = False
+    gasGiant = False
     mainWorldSize = 0
     mainWorldAtmosphere = 0
     mainWorldHydrographics = 0
@@ -17,6 +18,8 @@ class StarSystem():
     TechnologicalLevel = 0
 
     def rollDice(self, mod=0, numOfDice=2):
+        #mod is what is added to dice roll, defalt 0
+        #numOfDice is how many dice are rolled, defalt 2
         roll = mod
         for i in range(numOfDice):
             roll += random.randint(1,6)
@@ -35,38 +38,6 @@ class StarSystem():
             return "Starport is a frontier installation; no facilities."
         elif self.starport == "X":
             return "No starport."
-
-    def TechnologicalLevelLookUpTable(self):
-        if self.TechnologicalLevel <= 0:
-            return "Stone Age or Primitive."
-        elif self.TechnologicalLevel == 1:
-            return "Bronze Age to Middle Ages."
-        elif self.TechnologicalLevel == 2:
-            return "Circa 1400 to 1700."
-        elif self.TechnologicalLevel == 3:
-            return "Circa 1700 to 1860."
-        elif self.TechnologicalLevel == 4:
-            return "Circa 1860 to 1900."
-        elif self.TechnologicalLevel == 5:
-            return "Circa 1900 to 1939."
-        elif self.TechnologicalLevel == 6:
-            return "Circa 1940 to 1969."
-        elif self.TechnologicalLevel == 7:
-            return "Circa 1970 to 1979."
-        elif self.TechnologicalLevel == 8:
-            return "Circa 1980 to 1989."
-        elif self.TechnologicalLevel == 9:
-            return "Circa 1990 to 2000."
-        elif self.TechnologicalLevel == 10:
-            return "Interstellar community."
-        elif self.TechnologicalLevel == 11 or self.TechnologicalLevel == 12:
-            return "Average Imperial."
-        elif self.TechnologicalLevel == 13 or self.TechnologicalLevel == 14:
-            return "Above average Imperial"
-        elif self.TechnologicalLevel == 15:
-            return "Technical maximum Imperial"
-        elif self.TechnologicalLevel >= 16:
-            return "Occasional non-Imperial"
 
     def mainWorldSizeLookUpTable(self):
         if self.mainWorldSize <= 0:
@@ -204,51 +175,90 @@ class StarSystem():
         elif self.goverment  == 13:
             return "Religious Dictatorship."
 
-    def lawLevelLookUpTable(self): #need to add laws from lower numbers
+    def lawLevelLookUpTable(self): 
         if self.lawLevel <= 0:
-            return "No prohibitions."
-        elif self.lawLevel == 1:
-            return "Body pistols undetectable by standard detectors, explosives, and poison gas prohibited."
-        elif self.lawLevel == 2:
-            return "Portable ebergy weapons prohibited."
-        elif self.lawLevel == 3:
-            return "Weapons of a strict military nature prohibited."
-        elif self.lawLevel == 4:
-            return "Light assault weapons prohibited."
-        elif self.lawLevel == 5:
-            return "Personal concealable firearms prohibited."
-        elif self.lawLevel == 6:
-            return "Most firearms prohibited. Thhe carrying of any type of weapon is discouraged."
-        elif self.lawLevel == 7:
-            return "Shotguns are prohibited."
-        elif self.lawLevel == 8:
-            return "Long bladed weapons are controlled, and open possession is prohibited."
-        elif self.lawLevel == 9:
-            return "Possesion of any weapon outside one's residance is prohibited."
-        elif self.lawLevel >= 10:
-            return "Possession of any weapon is prohibited."
+            return "No prohibitions. "
+        result = ""
+        if self.lawLevel >= 1:
+            result += "Body pistols undetectable by standard detectors, explosives, and poison gas prohibited. "
+        if self.lawLevel >= 2:
+            result += "Portable ebergy weapons prohibited. "
+        if self.lawLevel >= 3:
+            result += "Weapons of a strict military nature prohibited. "
+        if self.lawLevel >= 4:
+            result += "Light assault weapons prohibited. "
+        if self.lawLevel >= 5:
+            result += "Personal concealable firearms prohibited. "
+        if self.lawLevel >= 6:
+            result += "Most firearms prohibited. The carrying of any type of weapon is discouraged. "
+        if self.lawLevel >= 7:
+            result += "Shotguns are prohibited. "
+        if self.lawLevel >= 8:
+            result += "Long bladed weapons are controlled, and open possession is prohibited. "
+        if self.lawLevel >= 9:
+            result += "Possesion of any weapon outside one's residance is prohibited. "
+        if self.lawLevel >= 10:
+            result += "Possession of any weapon is prohibited. "
+        return result
+
+    def TechnologicalLevelLookUpTable(self):
+        if self.TechnologicalLevel <= 0:
+            return "Stone Age or Primitive."
+        elif self.TechnologicalLevel == 1:
+            return "Bronze Age to Middle Ages."
+        elif self.TechnologicalLevel == 2:
+            return "Circa 1400 to 1700."
+        elif self.TechnologicalLevel == 3:
+            return "Circa 1700 to 1860."
+        elif self.TechnologicalLevel == 4:
+            return "Circa 1860 to 1900."
+        elif self.TechnologicalLevel == 5:
+            return "Circa 1900 to 1939."
+        elif self.TechnologicalLevel == 6:
+            return "Circa 1940 to 1969."
+        elif self.TechnologicalLevel == 7:
+            return "Circa 1970 to 1979."
+        elif self.TechnologicalLevel == 8:
+            return "Circa 1980 to 1989."
+        elif self.TechnologicalLevel == 9:
+            return "Circa 1990 to 2000."
+        elif self.TechnologicalLevel == 10:
+            return "Interstellar community."
+        elif self.TechnologicalLevel == 11 or self.TechnologicalLevel == 12:
+            return "Average Imperial."
+        elif self.TechnologicalLevel == 13 or self.TechnologicalLevel == 14:
+            return "Above average Imperial"
+        elif self.TechnologicalLevel == 15:
+            return "Technical maximum Imperial"
+        elif self.TechnologicalLevel >= 16:
+            return "Occasional non-Imperial"
 
     def __str__(self):
+        #when printed it will return all the stats of the star system based off of the tables descriptions
         if self.navelBase:
             waterbase = "Has a Navel Base."
         else:
             waterbase = "No Navel Base."
-        if self.gasGiatnt:
+        if self.gasGiant:
             gas = "Star system has gas giants."
         else:
             gas = "Star system has only terrestrial planets."
-        return f"Star system {self.name}. Starport: {self.starportLookUpTable()} {waterbase} {gas} Main world size: {self.mainWorldSizeLookUpTable()} Main world atmosphere: {self.mainWorldAtmosphereLookUpTable()} Main world Hydrograhics: {self.mainWorldHydrographicsLookUpTable()} Population: {self.populationLookUpTable()} Goverment: {self.govermentLookUpTable()} Law level: {self.lawLevelLookUpTable()}"
+        return f"Star system {self.name}. Starport: {self.starportLookUpTable()} {waterbase} {gas} Main world size: {self.mainWorldSizeLookUpTable()} Main world atmosphere: {self.mainWorldAtmosphereLookUpTable()} Main world Hydrograhics: {self.mainWorldHydrographicsLookUpTable()} Population: {self.populationLookUpTable()} Goverment: {self.govermentLookUpTable()} Laws: {self.lawLevelLookUpTable()}Technological level: {self.TechnologicalLevelLookUpTable()}"
 
     def __init__(self):
+        #name generator
         spaceNameTable = ['1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
         for i in range(random.randint(5,8)):
             self.name += spaceNameTable[random.randint(0,36)]
         self.name = self.name.strip()
+        #star port generator
         starPorts = ['A','A','A','B','B','C','C','D','E','E','X']
         self.starport = starPorts[self.rollDice(-2)]
+        #Navel base generator
         if self.starport != 'C' and self.starport != 'D' and self.starport != 'E' and self.starport != 'X':
             if self.rollDice() >= 8:
                 self.navelBase = True
+        #Scout base generator
         dm = 0
         if self.starport == 'A':
             dm = -3
@@ -259,13 +269,17 @@ class StarSystem():
         if self.starport != 'E' or self.starport != 'X':
             if self.rollDice(mod=dm) >= 7:
                 self.scoutBase = True
+        #Gas giant generator
         if self.rollDice() <= 9:
-            self.gasGiatnt = True
+            self.gasGiant = True
+        #Size generator
         self.mainWorldSize = self.rollDice(mod=-2)
+        #Atmosphere generator
         if self.mainWorldSize == 0:
             self.mainWorldAtmosphere = 0
         else:
             self.mainWorldAtmosphere = self.rollDice(mod=(self.mainWorldSize-7))
+        #Hydrographics generator
         dm = 0
         if self.mainWorldAtmosphere >= 10 or self.mainWorldAtmosphere <= 1:
             dm = self.mainWorldSize - 11
@@ -279,9 +293,13 @@ class StarSystem():
             self.mainWorldHydrographics = 10
         elif self.mainWorldHydrographics < 0:
             self.mainWorldHydrographics = 0
+        #Population generator
         self.population = self.rollDice(mod=-2)
+        #Goverment generator
         self.goverment = self.rollDice(mod=(self.population-7))
+        #Lawl level generator
         self.lawLevel = self.rollDice(mod=(self.goverment-7))
+        #Technological level generator
         dm = 0
         if self.starport == 'A':
             dm += 6

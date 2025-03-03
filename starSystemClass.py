@@ -2,6 +2,54 @@
 
 import random
 
+starportLookUpTable = {"A":"Excellent quality starport with refined fuel, overhaul, shipyards.","B":"Good quality starport with refined fuel, overhaul, shipyards for non-starships.","C":"Routine quality starport with unrefined fuel, some repair facilities.","D":"Poor quality starport with unrefined fuel; no repair facilities.","E":"Starport is a frontier installation; no facilities.","X":"No starport."}
+
+mainWorldSizeLookUpTable = {0:"Asteriod/Planetiod Belt",1:"1,000 miles(1 600 km)",2:"2,000 miles(3 200 km)",3:"3,000 miles(4 800 km)",4:"4,000 miles(6 400 km)",5:"5,000 miles(8 000 km)",6:"6,000 miles(9 600 km)",7:"7,000 miles(11 200 km)",8:"8,000 miles(12 800 km)",9:"9,000 miles(14 400 km)",10:"10,000 miles(16 000 km)"}
+
+mainWorldAtmosphereLookUpTable = {0:"No atmosphere.",1:"Trace.",2:"Very thin, tainted.",3:"Very thin.",4:"Thin, tainted.",5:"Thin.",6:"Standered.",7:"Standered, tainted.",8:"Dense.",9:"Dense, Tainted.",10:"Exotic.",11:"Corrosive.",12:"Insidious.",13:"Dense, high.",14:"Ellipsoid",15:"Thin, low."}
+
+mainWorldHydrographicsLookUpTable = {0:"No free standing water.",1:"10% water.",2:"20% water.",3:"30% water.",4:"40% water.",5:"50% water.",6:"60% water.",7:"70% water.",8:"80% water.",9:"90% water.",10:"No land masses."}
+
+populationLookUpTable = {0:"No inhabitans.",1:"Tens of inhabitans.",2:"Hundreds of inhabitans.",3:"Thousands of inhabitans.",4:"Tens of thousands.",5:"Hundreds of thousands.",6:"Millions of inhabitans.",7:"Tens of millions.",8:"Hundreds of millions.",9:"Billions of inhabitans.",10:"Tens of billions."}
+
+govermentLookUpTable = {0:"No goverment struture.",1:"Company/Corparation.",2:"Participating Democracy.",3:"Self-Perpatuating Oligarchy.",4:"Representative Democracy.",5:"Feudal Technocracy.",6:"Captive Goverment.",7:"Balkanization.",8:"Civil Service Bureaucracy.",9:"Impersonal Bureaucracy.",10:"Charismatic Dictator.",11:"Non-Charismatic Leader.",12:"Charismatic Oligarchy.",13:"Religious Dictatorship."}
+
+def lawLevelLookUpTable(lawLevel): 
+        if lawLevel <= 0:
+            return "No prohibitions. "
+        result = ""
+        if lawLevel >= 1:
+            result += "Body pistols undetectable by standard detectors, explosives, and poison gas prohibited. "
+        if lawLevel >= 2:
+            result += "Portable ebergy weapons prohibited. "
+        if lawLevel >= 3:
+            result += "Weapons of a strict military nature prohibited. "
+        if lawLevel >= 4:
+            result += "Light assault weapons prohibited. "
+        if lawLevel >= 5:
+            result += "Personal concealable firearms prohibited. "
+        if lawLevel >= 6:
+            result += "Most firearms prohibited. The carrying of any type of weapon is discouraged. "
+        if lawLevel >= 7:
+            result += "Shotguns are prohibited. "
+        if lawLevel >= 8:
+            result += "Long bladed weapons are controlled, and open possession is prohibited. "
+        if lawLevel >= 9:
+            result += "Possesion of any weapon outside one's residance is prohibited. "
+        if lawLevel >= 10:
+            result += "Possession of any weapon is prohibited. "
+        return result
+
+TechnologicalLevelLookUpTable = {0:"Stone Age or Primitive.",1:"Bronze Age to Middle Ages.",2:"Circa 1400 to 1700.",3:"Circa 1700 to 1860.",4:"Circa 1860 to 1900.",5:"Circa 1900 to 1939.",6:"Circa 1940 to 1969.",7:"Circa 1970 to 1979.",8:"Circa 1980 to 1989.",9:"Circa 1990 to 2000.",10:"Interstellar community.",11:"Average Imperial.",12:"Average Imperial.",13:"Above average Imperial",14:"Above average Imperial",15:"Technical maximum Imperial",16:"Occasional non-Imperial"}
+
+def clamp(n, minimum, maximum):
+    if n < minimum:
+        return minimum
+    elif n > maximum:
+        return maximum
+    else:
+        return n
+    
 class StarSystem():
     #defalt values for star system
     name = ""
@@ -25,214 +73,6 @@ class StarSystem():
             roll += random.randint(1,6)
         return roll
 
-    def starportLookUpTable(self):
-        if self.starport == "A":
-            return "Excellent quality starport with refined fuel, overhaul, shipyards."
-        elif self.starport == "B":
-            return "Good quality starport with refined fuel, overhaul, shipyards for non-starships."
-        elif self.starport == "C":
-            return "Routine quality starport with unrefined fuel, some repair facilities."
-        elif self.starport == "D":
-            return "Poor quality starport with unrefined fuel; no repair facilities."
-        elif self.starport == "E":
-            return "Starport is a frontier installation; no facilities."
-        elif self.starport == "X":
-            return "No starport."
-
-    def mainWorldSizeLookUpTable(self):
-        if self.mainWorldSize <= 0:
-            return "Asteriod/Planetiod Belt"
-        elif self.mainWorldSize == 1:
-            return "1,000 miles(1 600 km)"
-        elif self.mainWorldSize == 2:
-            return "2,000 miles(3 200 km)"
-        elif self.mainWorldSize == 3:
-            return "3,000 miles(4 800 km)"
-        elif self.mainWorldSize == 4:
-            return "4,000 miles(6 400 km)"
-        elif self.mainWorldSize == 5:
-            return "5,000 miles(8 000 km)"
-        elif self.mainWorldSize == 6:
-            return "6,000 miles(9 600 km)"
-        elif self.mainWorldSize == 7:
-            return "7,000 miles(11 200 km)"
-        elif self.mainWorldSize == 8:
-            return "8,000 miles(12 800 km)"
-        elif self.mainWorldSize == 9:
-            return "9,000 miles(14 400 km)"
-        elif self.mainWorldSize >= 10:
-            return "10,000 miles(16 000 km)"
-
-    def mainWorldAtmosphereLookUpTable(self):
-        if self.mainWorldAtmosphere <= 0:
-            return "No atmosphere."
-        elif self.mainWorldAtmosphere == 1:
-            return "Trace."
-        elif self.mainWorldAtmosphere == 2:
-            return "Very thin, tainted."
-        elif self.mainWorldAtmosphere == 3:
-            return "Very thin."
-        elif self.mainWorldAtmosphere == 4:
-            return "Thin, tainted."
-        elif self.mainWorldAtmosphere == 5:
-            return "Thin."
-        elif self.mainWorldAtmosphere == 6:
-            return "Standered."
-        elif self.mainWorldAtmosphere == 7:
-            return "Standered, tainted."
-        elif self.mainWorldAtmosphere == 8:
-            return "Dense."
-        elif self.mainWorldAtmosphere == 9:
-            return "Dense, Tainted."
-        elif self.mainWorldAtmosphere == 10:
-            return "Exotic."
-        elif self.mainWorldAtmosphere == 11:
-            return "Corrosive."
-        elif self.mainWorldAtmosphere == 12:
-            return "Insidious."
-        elif self.mainWorldAtmosphere == 13:
-            return "Dense, high."
-        elif self.mainWorldAtmosphere == 14:
-            return "Ellipsoid"
-        elif self.mainWorldAtmosphere >= 15:
-            return "Thin, low."
-
-    def mainWorldHydrographicsLookUpTable(self):
-        if self.mainWorldHydrographics <= 0:
-            return "No free standing water."
-        elif self.mainWorldHydrographics == 1:
-            return "10% water."
-        elif self.mainWorldHydrographics == 2:
-            return "20% water."
-        elif self.mainWorldHydrographics == 3:
-            return "30% water."
-        elif self.mainWorldHydrographics == 4:
-            return "40% water."
-        elif self.mainWorldHydrographics == 5:
-            return "50% water."
-        elif self.mainWorldHydrographics == 6:
-            return "60% water."
-        elif self.mainWorldHydrographics == 7:
-            return "70% water."
-        elif self.mainWorldHydrographics == 8:
-            return "80% water."
-        elif self.mainWorldHydrographics == 9:
-            return "90% water."
-        elif self.mainWorldHydrographics == 10:
-            return "No land masses."
-
-    def populationLookUpTable(self):
-        if self.population <= 0:
-            return "No inhabitans."
-        elif self.population == 1:
-            return "Tens of inhabitans."
-        elif self.population == 2:
-            return "Hundreds of inhabitans."
-        elif self.population == 3:
-            return "Thousands of inhabitans."
-        elif self.population == 4:
-            return "Tens of thousands."
-        elif self.population == 5:
-            return "Hundreds of thousands."
-        elif self.population == 6:
-            return "Millions of inhabitans."
-        elif self.population == 7:
-            return "Tens of millions."
-        elif self.population == 8:
-            return "Hundreds of millions."
-        elif self.population == 9:
-            return "Billions of inhabitans."
-        elif self.population >= 10:
-            return "Tens of billions."
-
-    def govermentLookUpTable(self):
-        if self.goverment <= 0:
-            return "No goverment struture."
-        elif self.goverment  == 1:
-            return "Company/Corparation."
-        elif self.goverment  == 2:
-            return "Participating Democracy."
-        elif self.goverment  == 3:
-            return "Self-Perpatuating Oligarchy."
-        elif self.goverment  == 4:
-            return "Representative Democracy."
-        elif self.goverment  == 5:
-            return "Feudal Technocracy."
-        elif self.goverment  == 6:
-            return "Captive Goverment."
-        elif self.goverment  == 7:
-            return "Balkanization."
-        elif self.goverment  == 8:
-            return "Civil Service Bureaucracy."
-        elif self.goverment  == 9:
-            return "Impersonal Bureaucracy."
-        elif self.goverment  == 10:
-            return "Charismatic Dictator."
-        elif self.goverment  == 11:
-            return "Non-Charismatic Leader."
-        elif self.goverment  == 12:
-            return "Charismatic Oligarchy."
-        elif self.goverment  == 13:
-            return "Religious Dictatorship."
-
-    def lawLevelLookUpTable(self): 
-        if self.lawLevel <= 0:
-            return "No prohibitions. "
-        result = ""
-        if self.lawLevel >= 1:
-            result += "Body pistols undetectable by standard detectors, explosives, and poison gas prohibited. "
-        if self.lawLevel >= 2:
-            result += "Portable ebergy weapons prohibited. "
-        if self.lawLevel >= 3:
-            result += "Weapons of a strict military nature prohibited. "
-        if self.lawLevel >= 4:
-            result += "Light assault weapons prohibited. "
-        if self.lawLevel >= 5:
-            result += "Personal concealable firearms prohibited. "
-        if self.lawLevel >= 6:
-            result += "Most firearms prohibited. The carrying of any type of weapon is discouraged. "
-        if self.lawLevel >= 7:
-            result += "Shotguns are prohibited. "
-        if self.lawLevel >= 8:
-            result += "Long bladed weapons are controlled, and open possession is prohibited. "
-        if self.lawLevel >= 9:
-            result += "Possesion of any weapon outside one's residance is prohibited. "
-        if self.lawLevel >= 10:
-            result += "Possession of any weapon is prohibited. "
-        return result
-
-    def TechnologicalLevelLookUpTable(self):
-        if self.TechnologicalLevel <= 0:
-            return "Stone Age or Primitive."
-        elif self.TechnologicalLevel == 1:
-            return "Bronze Age to Middle Ages."
-        elif self.TechnologicalLevel == 2:
-            return "Circa 1400 to 1700."
-        elif self.TechnologicalLevel == 3:
-            return "Circa 1700 to 1860."
-        elif self.TechnologicalLevel == 4:
-            return "Circa 1860 to 1900."
-        elif self.TechnologicalLevel == 5:
-            return "Circa 1900 to 1939."
-        elif self.TechnologicalLevel == 6:
-            return "Circa 1940 to 1969."
-        elif self.TechnologicalLevel == 7:
-            return "Circa 1970 to 1979."
-        elif self.TechnologicalLevel == 8:
-            return "Circa 1980 to 1989."
-        elif self.TechnologicalLevel == 9:
-            return "Circa 1990 to 2000."
-        elif self.TechnologicalLevel == 10:
-            return "Interstellar community."
-        elif self.TechnologicalLevel == 11 or self.TechnologicalLevel == 12:
-            return "Average Imperial."
-        elif self.TechnologicalLevel == 13 or self.TechnologicalLevel == 14:
-            return "Above average Imperial"
-        elif self.TechnologicalLevel == 15:
-            return "Technical maximum Imperial"
-        elif self.TechnologicalLevel >= 16:
-            return "Occasional non-Imperial"
-
     def __str__(self):
         #when printed it will return all the stats of the star system based off of the tables descriptions
         if self.navelBase:
@@ -243,7 +83,7 @@ class StarSystem():
             gas = "Star system has gas giants."
         else:
             gas = "Star system has only terrestrial planets."
-        return f"Star system {self.name}. Starport: {self.starportLookUpTable()} {waterbase} {gas} Main world size: {self.mainWorldSizeLookUpTable()} Main world atmosphere: {self.mainWorldAtmosphereLookUpTable()} Main world Hydrograhics: {self.mainWorldHydrographicsLookUpTable()} Population: {self.populationLookUpTable()} Goverment: {self.govermentLookUpTable()} Laws: {self.lawLevelLookUpTable()}Technological level: {self.TechnologicalLevelLookUpTable()}"
+        return f"Star system {self.name}. Starport: {starportLookUpTable[self.starport]} {waterbase} {gas} Main world size: {mainWorldSizeLookUpTable[clamp(self.mainWorldSize,0,10)]} Main world atmosphere: {mainWorldAtmosphereLookUpTable[clamp(self.mainWorldAtmosphere,0,15)]} Main world Hydrograhics: {mainWorldHydrographicsLookUpTable[clamp(self.mainWorldHydrographics,0,10)]} Population: {populationLookUpTable[clamp(self.population,0,10)]} Goverment: {govermentLookUpTable[clamp(self.goverment,0,13)]} Laws: {lawLevelLookUpTable(self.lawLevel)}Technological level: {TechnologicalLevelLookUpTable[clamp(self.TechnologicalLevel,0,16)]}"
 
     def __init__(self):
         #name generator
